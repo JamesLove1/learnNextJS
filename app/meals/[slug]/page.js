@@ -1,7 +1,7 @@
 export default function meal({ params }) {
 
-return (
-    <h1>{params.slug}</h1>
-)
+    return (
+        <h1>{params.slug}</h1>
+    )
 
 }
