@@ -2,11 +2,12 @@
 
 export default function Error(){
 
-    return <main className="error">
+    return (
+        <main className="error">
 
-        <h1>An error occured!</h1>
-        <p>Failed to tetch meal data. Please try again later.</p>
+            <h1>An error occured!</h1>
+            <p>Failed to tetch meal data. Please try again later.</p>
 
-    </main>
-
+        </main>
+    )
 }
