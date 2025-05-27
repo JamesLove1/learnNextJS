@@ -1,5 +1,5 @@
 {
-  "/news/page": "app/news/page.js",
+  "/page": "app/page.js",
   "/archive/@archive/page": "app/archive/@archive/page.js",
-  "/archive/@archive/[year]/page": "app/archive/@archive/[year]/page.js"
+  "/archive/@archive/[{...fillter}]/page": "app/archive/@archive/[{...fillter}]/page.js"
 }
