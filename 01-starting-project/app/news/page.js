@@ -1,14 +1,13 @@
-import Link from "next/link";
+import { DUMMY_NEWS } from "@/dummy-news";
+import NewsList from "@/Components/news-list";
 
 export default function NewsPage(){
 
     return (
 
         <>
-            <Link src={"/news/USA-Presidental-Election"} />
-            <Link src={"/news/UK Politics"} />
-            <Link src={"/news/WildLife"} />
-            <Link src={"/news/Buissness"} />
+            <h1>News Page</h1>
+            <NewsList news={DUMMY_NEWS}/>
         </>
 
 
