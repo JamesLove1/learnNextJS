@@ -1,5 +1,4 @@
 {
-  "/page": "app/page.js",
-  "/archive/@archive/page": "app/archive/@archive/page.js",
-  "/archive/@archive/[{...fillter}]/page": "app/archive/@archive/[{...fillter}]/page.js"
+  "/icon.jpg/route": "app/icon.jpg/route.js",
+  "/archive/@archive/[[...fillter]]/page": "app/archive/@archive/[[...fillter]]/page.js"
 }
