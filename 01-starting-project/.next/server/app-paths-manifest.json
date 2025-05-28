@@ -1,4 +1,5 @@
 {
   "/icon.jpg/route": "app/icon.jpg/route.js",
-  "/archive/@archive/[[...fillter]]/page": "app/archive/@archive/[[...fillter]]/page.js"
+  "/(content)/news/page": "app/(content)/news/page.js",
+  "/(content)/news/[slug]/page": "app/(content)/news/[slug]/page.js"
 }
