@@ -2,30 +2,19 @@ import NewsList from "@/Components/news-list";
 import { getNewsForYear } from "@/lib/news";
 import Link from "next/link";
 
-import { getAvailableNewsYears, 
+import { 
+    getAvailableNewsYears, 
     getAvailableNewsMonths,
     getNewsForYearAndMonth } from "@/lib/news";
+import { Suspense } from "react";
 
-export default function FillteredNewsPage({params}){
+async function FilteredNews({year, month}){
+    let news; 
 
-    const filter = params.fillter;
-
-    // console.log(filter);
-    
-    const selletedYear = filter?.[0];
-    const sellectedMonth = filter?.[1];
-
-    let news;
-    let links = getAvailableNewsYears();
-
-    if (selletedYear && !sellectedMonth){
-        news = getNewsForYear(selletedYear);
-        links = getAvailableNewsMonths(selletedYear);
-    }
-
-    if (selletedYear && sellectedMonth){
-        news = getNewsForYearAndMonth(selletedYear, sellectedMonth);
-        links = [];
+    if (year && !month){
+        news = await getNewsForYear(year);
+    } else if (year && month){
+        news = await getNewsForYearAndMonth(year, month);
     }
 
     let newsContent = <p>No news found for the selected period.</p>
@@ -34,9 +23,34 @@ export default function FillteredNewsPage({params}){
         newsContent = <NewsList news={news} />
     }
 
+    return newsContent;
+
+}
+
+export default async function FillteredNewsPage({params}){
+
+    const filter = params.fillter;
+
+    // console.log(filter);
+    
+    const selletedYear = filter?.[0];
+    const sellectedMonth = filter?.[1];
+
+    const acailableYears = await getAvailableNewsYears();
+    let links = acailableYears;
+
+    if (selletedYear && !sellectedMonth){
+        
+        links = getAvailableNewsMonths(selletedYear);
+    }
+
+    if (selletedYear && sellectedMonth){
+        links = [];
+    }
+
     if (
-        (selletedYear && !getAvailableNewsYears().includes(+selletedYear)) ||
-        (sellectedMonth && !getAvailableNewsMonths(selletedYear).includes(+sellectedMonth))
+        (selletedYear && !acailableYears.includes(selletedYear)) ||
+        (sellectedMonth && !getAvailableNewsMonths(selletedYear).includes(sellectedMonth))
     ){
         throw new Error(`Invalid filter.`)
     }
@@ -63,7 +77,9 @@ export default function FillteredNewsPage({params}){
                 </ul>
             </nav>
         </header>
-        {newsContent}
+        <Suspense fallback={<p>Loading News...</p>}>
+            <FilteredNews year={selletedYear} month={sellectedMonth} />
+        </Suspense>
         </>
     );
 }
